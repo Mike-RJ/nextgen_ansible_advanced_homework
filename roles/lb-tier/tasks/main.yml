@@ -1,10 +1,10 @@
 ---
 - name: debug stuff
   debug:
-    msg: "{{ hostvars }}"
+    msg: "{{ groups['apps'] }}"
 - name: Install load balancer packages
   package:
-    name: "{{ groups['apps'] }}"
+    name: "{{ payload }}"
     state: present
   tags:
     - haproxy
@@ -21,12 +21,11 @@
 
 - name: Print Config
   command: cat /etc/haproxy/haproxy.cfg
-  ignore_errors: yes
-  register: testvar
+  register: test
 
-- debug:
-    msg: "{{ testvar }}"
-  ignore_errors: yes
+- name: print test
+  debug:
+    msg: "{{ test.stdout }}"
 
 - name: Ensure HAProxy Service is Enabled
   service:
