@@ -25,14 +25,9 @@ backend app-servers
     mode http
     balance roundrobin
     option forwardfor
-{% if osp_srv_inventory_app1 and osp_srv_inventory_app2 is defined %}
 {% for host in groups['apps'] %}
-    server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check
+    server app{{loop.index}} {{hostvars[host]['ansible_hostname']}}:8080 cookie app{{loop.index}} check
 {% endfor %}
-{% else %}
-    server app1 app1:8080 cookie app1 check
-    server app2 app2:8080 cookie app2 check
-{% endif %}
 #{% for host in groups['apps'] %}
 #    server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check
 #{% endfor %}

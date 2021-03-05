@@ -7,26 +7,6 @@
     - haproxy
 
 # Included due to an issue with the existing haproxy template, app1/app2, work on prod not QA, vice-versa.
-- name: Collect Prerequisite facts
-  block:
-    - name: Ensure openstacksdk is installed
-      pip:
-        name: openstacksdk==0.52
-        state: present
-        executable: pip3
-  
-    - name: Collect details about app1
-      os_server_facts:
-        cloud: openstack
-        server: 'app1'
-      register: osp_srv_inventory_app1
-    - name: Collect details about app2
-      os_server_facts:
-        cloud: openstack
-        server: 'app2'
-      register: osp_srv_inventory_app2
-  ignore_errors: yes
-
 - name: Configure haproxy
   template:
     src: haproxy.cfg.j2
