@@ -4,4 +4,6 @@
   service:
     name: tomcat
     state: started
+  tags:
+    - tomcat
 

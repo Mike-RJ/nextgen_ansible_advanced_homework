@@ -5,7 +5,7 @@
     name: tomcat
     state: started
   tags:
-    - tomcat
+    - haproxy
 
 - name: restart_haproxy
   service:
