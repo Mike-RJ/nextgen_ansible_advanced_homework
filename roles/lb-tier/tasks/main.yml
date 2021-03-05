@@ -13,6 +13,7 @@
       pip:
         name: openstacksdk==0.52
         state: present
+        executable: pip3
   
     - name: Collect details about app1
       os_server_facts:
