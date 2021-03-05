@@ -3,15 +3,21 @@
   package:
     name: "{{ payload }}"
     state: present
+  tags:
+    - haproxy
 
 - name: Configure haproxy
   template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
   notify: restart_haproxy
+  tags:
+    - haproxy
 
 - name: Ensure HAProxy Service is Enabled
   service:
     name: "{{ payload }}"
     state: started
     enabled: true
+  tags:
+    - haproxy

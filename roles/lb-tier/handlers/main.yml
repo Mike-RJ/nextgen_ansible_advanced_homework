@@ -1,7 +1,16 @@
 ---
-
+# why is this in here????
 - name: start {{ payload }}
+  service:
+    name: tomcat
+    state: started
+  tags:
+    - tomcat
+
+- name: restart_haproxy
   service:
     name: haproxy
     state: restarted
+  tags:
+    - haproxy
 
