@@ -9,7 +9,7 @@
   tasks:
     - name: debug stuff
       debug:
-        msg: "{{ hostvars['54.226.52.219']['network_interfaces']['private_ip_addresses'] }}"
+        msg: "{{ hostvars['54.226.52.219'] }}"
 
 - name: setup load-balancer tier
   hosts: frontends
