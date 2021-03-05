@@ -14,7 +14,7 @@
    region_name: regionOne
    name: "{{ item.name }}"
    state: absent
-  loop: "{{ osp_srv_inventory.ansible_facts.openstack_servers }}"
+  loop: "{{ osp_srv_inventory.openstack_servers }}"
   tags:
     - osp.delete
    
