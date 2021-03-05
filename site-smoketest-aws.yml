@@ -1,9 +1,6 @@
 - hosts: frontends
   gather_facts: false
   tasks:
-  - name: debug stuff
-    debug:
-      msg: "{{ groups['frontends'] }}"
   - name: Curl website
     uri:
       url: "http://{{ item }}"

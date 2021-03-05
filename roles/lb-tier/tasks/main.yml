@@ -6,7 +6,6 @@
   tags:
     - haproxy
 
-# Included due to an issue with the existing haproxy template, app1/app2, work on prod not QA, vice-versa.
 - name: Configure haproxy
   template:
     src: haproxy.cfg.j2

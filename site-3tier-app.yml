@@ -4,12 +4,6 @@
   - name: osp-facts
 
 # Setup front-end load balancer tier
-- hosts: frontends
-  become: yes
-  tasks:
-    - name: debug stuff
-      debug:
-        msg: "{{ hostvars['54.226.52.219'] }}"
 
 - name: setup load-balancer tier
   hosts: frontends

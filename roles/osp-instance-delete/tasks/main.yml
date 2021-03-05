@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/osp-instance-delete
 - name: Fetch Instance Info
-  os_server_facts:
+  os_server_facts: # I have to use os_server_facts since os_server_info doesn't seem to work. 
     cloud: openstack
     region_name: regionOne
   register: osp_srv_inventory
