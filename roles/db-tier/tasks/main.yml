@@ -1,5 +1,7 @@
 ---
 - name: Ignore-Errors-Block # Because this does NOT work on OSP.  Known issue.
+  block:
+  
     - name: Install Postgres packages
       package:
         name: "{{ __package }}"
