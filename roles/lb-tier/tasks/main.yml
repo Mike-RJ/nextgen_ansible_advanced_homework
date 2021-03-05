@@ -4,7 +4,7 @@
     msg: "{{ hostvars }}"
 - name: Install load balancer packages
   package:
-    name: "{{ payload }}"
+    name: "{{ groups['apps'] }}"
     state: present
   tags:
     - haproxy
@@ -21,6 +21,11 @@
 
 - name: Print Config
   command: cat /etc/haproxy/haproxy.cfg
+  ignore_errors: yes
+  register: testvar
+
+- debug:
+    msg: "{{ testvar }}"
   ignore_errors: yes
 
 - name: Ensure HAProxy Service is Enabled
