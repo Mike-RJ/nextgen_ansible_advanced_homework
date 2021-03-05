@@ -1,3 +1,4 @@
+{{ ansible_managed  | comment }}
 global
   log /dev/log  local0
   log /dev/log  local1 notice
@@ -25,8 +26,10 @@ backend app-servers
     mode http
     balance roundrobin
     option forwardfor
-    server app1 {{ groups['apps'][0] }}:8080 cookie app1 check
-    server app2 {{ groups['apps'][1] }}:8080 cookie app2 check
-#{% for host in groups['apps'] %}
-#    server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check
-#{% endfor %}
+{% if hostvars['54.226.52.219']['tags']['guid'] == aws_guid %} # <-- this is required for Prod instances, as the ansible inventory,hostname are the public IP, private IP is unretrievable, and DNS resolves to private IP
+    server app1 app1:8080 cookie app1 check # Rely upon DNS
+    server app2 app2:8080 cookie app2 check # Rely upon DNS
+{% else %}
+{% for host in groups['apps'] %} # <-- otherwise, use the hostname.  This is required for OSP instances, as the host entries resolve to the public IP
+    server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check #  Autogenerate
+{% endfor %}
