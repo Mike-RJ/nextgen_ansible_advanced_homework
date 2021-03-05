@@ -27,10 +27,10 @@ backend app-servers
     balance roundrobin
     option forwardfor
 {% for host in groups['apps'] %}
-{% if hostvars[host]['tags']['guid'] == aws_guid %} # <-- this is required for Prod instances, as the ansible inventory,hostname are the public IP, private IP is unretrievable, and DNS resolves to private IP
-    server app1 app1:8080 cookie app1 check # Rely upon DNS
-    server app2 app2:8080 cookie app2 check # Rely upon DNS
+{% if hostvars[host]['tags']['guid'] is defined and hostvars[host]['tags']['guid'] == aws_guid %}
+    #this is required for Prod instances, as the ansible inventory,hostname are the public IP, private IP is unretrievable, and DNS resolves to private IP
+    server app{{ loop.index }} app{{ loop.index }}:8080 cookie {{ loop.index }} check # Rely upon DNS
 {% else %}
-    server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check #  Autogenerate
+    server app{{ loop.index }} {{ hostvars[host]['inventory_hostname'] }}:8080 cookie app{{ loop.index }} check #  Autogenerate
 {% endif %}
 {% endfor %}
