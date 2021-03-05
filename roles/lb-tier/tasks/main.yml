@@ -1,7 +1,7 @@
 ---
 - name: debug stuff
   debug:
-    msg: "{{ ansible_facts['54.226.52.219'] }}"
+    msg: "{{ hostvars['54.226.52.219'] }}"
 - name: Install load balancer packages
   package:
     name: "{{ payload }}"
