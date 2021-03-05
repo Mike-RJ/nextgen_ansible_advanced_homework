@@ -4,9 +4,12 @@
   - name: osp-facts
 
 # Setup front-end load balancer tier
-- name: debug stuff
-  debug:
-    msg: "{{ hostvars['54.226.52.219']['network_interfaces']['private_ip_addresses'] }}"
+- hosts: frontends
+  become: yes
+  tasks:
+    - name: debug stuff
+      debug:
+        msg: "{{ hostvars['54.226.52.219']['network_interfaces']['private_ip_addresses'] }}"
 
 - name: setup load-balancer tier
   hosts: frontends
