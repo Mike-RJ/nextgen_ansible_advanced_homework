@@ -3,7 +3,7 @@
 - name: Fetch Instance Info
   os_server_facts:
     cloud: openstack
-    region_name: RegionOne
+    region_name: regionOne
   register: osp_srv_inventory
   tags:
     - osp.delete
@@ -11,6 +11,7 @@
 - name: Delete instances
   os_server:
    cloud: openstack
+   region_name: regionOne
    name: "{{ item.name }}"
    state: absent
   loop: "{{ osp_srv_inventory.ansible_facts.openstack_servers }}"
