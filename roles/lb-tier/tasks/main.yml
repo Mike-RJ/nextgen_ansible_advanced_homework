@@ -1,7 +1,7 @@
 ---
 - name: debug stuff
   debug:
-    msg: "{{ hostvars['54.226.52.219']['network_interfaces'] }}"
+    msg: "{{ hostvars['54.226.52.219']['network_interfaces']['private_ip_address'] }}"
 - name: Install load balancer packages
   package:
     name: "{{ payload }}"
