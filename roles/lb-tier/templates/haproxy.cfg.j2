@@ -33,3 +33,4 @@ backend app-servers
 {% for host in groups['apps'] %} # <-- otherwise, use the hostname.  This is required for OSP instances, as the host entries resolve to the public IP
     server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check #  Autogenerate
 {% endfor %}
+{% endif %}
