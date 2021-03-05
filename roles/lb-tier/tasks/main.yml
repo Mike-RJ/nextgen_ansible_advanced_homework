@@ -17,6 +17,11 @@
   notify: restart_haproxy
   tags:
     - haproxy
+  ignore_errors: yes
+
+- name: Print Config
+  command: cat /etc/haproxy/haproxy.cfg
+  ignore_errors: yes
 
 - name: Ensure HAProxy Service is Enabled
   service:
