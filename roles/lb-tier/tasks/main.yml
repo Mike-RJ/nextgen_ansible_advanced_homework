@@ -6,6 +6,20 @@
   tags:
     - haproxy
 
+- name: Collect Prerequisite facts
+  block:
+    - name: Collect details about app1
+      os_server_facts:
+        cloud: openstack
+        server: 'app1'
+      register: osp_srv_inventory_app1
+    - name: Collect details about app2
+      os_server_facts:
+        cloud: openstack
+        server: 'app2'
+      register: osp_srv_inventory_app2
+  ignore_errors: yes
+
 - name: Configure haproxy
   template:
     src: haproxy.cfg.j2
