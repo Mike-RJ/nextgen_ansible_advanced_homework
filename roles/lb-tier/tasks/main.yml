@@ -1,4 +1,7 @@
 ---
+- name: debug stuff
+  debug:
+    msg: "{{ hostvars }}"
 - name: Install load balancer packages
   package:
     name: "{{ payload }}"
